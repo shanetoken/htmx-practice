@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/htmx.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.11/dist/ext/client-side-templates.js"></script>
+    <script src="https://unpkg.com/mustache@latest"></script>
+  </head>
+  <body>
+    <div id="products-container">
+      <div hx-indicator="#products-container">Loading products...</div>
+
+      <div
+        hx-ext="client-side-templates"
+        hx-get="https://fakestoreapi.com/products?limit=10"
+        hx-swap="outerHTML"
+        mustache-array-template="foo"
+      ></div>
+
+      <template id="foo">
+        <div class="product-card">
+          <img src="{{image}}" alt="{{title}}" />
+          <h2>{{title}}</h2>
+          <h3>{{price}}</h3>
+          <p>{{description}}</p>
+        </div>
+      </template>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
